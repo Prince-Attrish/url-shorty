@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>URL Shortner</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="bg-slate-900 text-white/80">
+    <div class="container mx-auto px-5">
+      <h1 class="text-4xl text-center my-7">
+        URL SHORTNER
+      </h1>
+      <form action="/shortUrls" method="post" class="flex gap-2 w-full">
+        <label for="fullUrl" class="sr-only">URL</label>
+        <input
+        type="url"
+        id="fullUrl"
+        name="fullUrl"
+        placeholder="Enter URL"
+        required
+        class="py-2 rounded px-4 w-full bg-gray-700 text-white"
+        />
+        <button type="submit" class="bg-green-500 text-white focus:outline outline-2 outline-green-600 outline-offset-2 px-5 font-bold uppercase rounded-md w-fit hover:bg-green-600">Short</button>
+      </form>
+      
+
+      <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-10">
+        <table
+          class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+        >
+        <caption class="p-5 border-b text-lg font-semibold text-left rtl:text-right md:text-center text-white bg-gray-800">
+            YOUR URLS
+        </caption>
+          <thead
+            class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+          >
+            <tr>
+              <th scope="col" class="px-6 py-3">Long Url</th>
+              <th scope="col" class="px-6 py-3">Short Url</th>
+              <th scope="col" class="px-6 py-3 text-center">Clicks</th>
+              <th scope="col" class="px-6 py-3">
+                <span class="sr-only">Edit</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% shortUrls.forEach((shortUrl)=> { %>
+            <tr
+              class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+            >
+              <th
+                scope="row"
+                class="px-6 py-4 font-medium text-gray-900 truncate whitespace-nowrap dark:text-white"
+              >
+              <%= shortUrl.full %>
+              </th>
+              <td class="px-6 py-4">
+                <a
+                  href="<%= shortUrl.short %>"
+                  class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                  ><%= shortUrl.short %></a
+                >
+              </td>
+              <td class="px-6 py-4 font-bold text-center">
+                  <%= shortUrl.clicks %>
+              </td>
+              <td class="px-6 py-4 text-center space-x-2 whitespace-nowrap">
+                <a
+                  href="#"
+                  class="font-medium text-white hover:bg-blue-500 py-1 px-4 bg-blue-600 rounded-md"
+                  >Edit</a
+                >
+                <a
+                  href="#"
+                  class="font-medium text-white hover:bg-red-500 py-1 px-4 bg-red-600 rounded-md"
+                  >Remove</a
+                >
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
